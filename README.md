@@ -12,5 +12,13 @@ Before running this model, you need to execute the commands of data preparation 
 We first need to extract features from the noisy training set, then all training data sets are integrated.
 ```
 python3 process_lre_data.py
-
+utils/combine_data.sh data-16k/lre17_train_5th data-16k/lre17_train data-16k/lre17_train_5_snrs data-16k/lre17_train_10_snrs data-16k/lre17_train_15_snrs data-16k/lre17_train_20_snrs
+cat data-16k/lre17_train_5_snrs/wav2vec_pretrained_model.txt data-16k/lre17_train_10_snrs/wav2vec_pretrained_model.txt data-16k/lre17_train_15_snrs/wav2vec_pretrained_model.txt data-16k/lre17_train_20_snrs/wav2vec_pretrained_model.txt data-16k/lre17_train/wav2vec_pretrained_model.txt > data-16k/lre17_train_5th/wav2vec_pretrained_model.txt
+mkdir data-16k/lre17_train_5th/wav2vec_pretrained_model_16_layer
+cat data-16k/lre17_train_5_snrs/wav2vec_pretrained_model_16_layer/feats.scp data-16k/lre17_train_10_snrs/wav2vec_pretrained_model_16_layer/feats.scp data-16k/lre17_train_15_snrs/wav2vec_pretrained_model_16_layer/feats.scp data-16k/lre17_train_20_snrs/wav2vec_pretrained_model_16_layer/feats.scp data-16k/lre17_train/wav2vec_pretrained_model_16_layer/feats.scp > data-16k/lre17_train_5th/wav2vec_pretrained_model_16_layer/feats.scp
+mv data-16k/lre17_train_5th/wav2vec_pretrained_model.txt data-16k/lre17_train_5th/feats.scp
+utils/fix_data_dir.sh data-16k/lre17_train_5th
+mv data-16k/lre17_train_5th/feats.scp data-16k/lre17_train_5th/wav2vec_pretrained_model.txt
+cp data-16k/lre17_train_5th/{utt2spk,utt2lang,wav.scp} data-16k/lre17_train_5th/wav2vec_pretrained_model_16_layer
+utils/fix_data_dir.sh data-16k/lre17_train_5th/wav2vec_pretrained_model_16_layer
 ```
