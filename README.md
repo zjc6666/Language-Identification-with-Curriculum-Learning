@@ -8,4 +8,9 @@ The whole training process is divided into seven stages. The later stage contain
 When use Curriculum leanring, although noisy data sets are used, the amount of data sent into the model each epoch is always the same as the number of utterances in the original clean data set, but data sets with different signal-to-noise ratios will be included in different stages.
 
 Before running this model, you need to execute the commands of data preparation and noise adding in model [XSA](https://github.com/zjc6666/Language-Identification).
-## 
+## Extractor noise data fearure
+We first need to extract features from the noisy training set, then all training data sets are integrated.
+```
+python3 process_lre_data.py
+
+```
