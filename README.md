@@ -8,6 +8,8 @@ The whole training process is divided into seven stages. The later stage contain
 When use Curriculum leanring, although noisy data sets are used, the amount of data sent into the model each epoch is always the same as the number of utterances in the original clean data set, but data sets with different signal-to-noise ratios will be included in different stages.
 
 Before running this model, you need to execute the commands of data preparation and noise adding in model [XSA](https://github.com/zjc6666/Language-Identification).
+
+## Training pipeline
 ## Extractor noise data fearure
 We first need to extract features from the noisy training set, then all training data sets are integrated.
 ```
@@ -22,3 +24,15 @@ mv data-16k/lre17_train_5th/feats.scp data-16k/lre17_train_5th/wav2vec_pretraine
 cp data-16k/lre17_train_5th/{utt2spk,utt2lang,wav.scp} data-16k/lre17_train_5th/wav2vec_pretrained_model_16_layer
 utils/fix_data_dir.sh data-16k/lre17_train_5th/wav2vec_pretrained_model_16_layer
 ```
+### Training
+```
+python3 train_xsa.py
+```
+## Test pipeline
+You can change "check_point" variable in xsa_config.json file, Change to the epoch you want to use.
+```
+python3 test.py
+```
+
+## Notice
+All the required parameters in the script are written in the xsa_config.json file.
